@@ -3,11 +3,14 @@ package com.example.ejemplotoolbar
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,6 +33,28 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
+
+        val itemsBusqueda = menu?.findItem(R.id.busqueda)
+        val vistaBusqueda = itemsBusqueda?.actionView as SearchView
+
+        vistaBusqueda.queryHint = "Escribe tu nombre..."
+
+        vistaBusqueda.setOnQueryTextFocusChangeListener { v, hasFocus ->
+            Log.d("LISTENERFOCUS", hasFocus.toString())
+        }
+
+        vistaBusqueda.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                Log.d("onQueryTextChange", newText!!)
+                return true
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                Log.d("onQueryTextSubmit", query!!)
+                return true
+            }
+        })
 
         return super.onCreateOptionsMenu(menu)
     }
