@@ -15,6 +15,9 @@ class PantallaDos : AppCompatActivity() {
         toolbar = findViewById(R.id.toolbar)
         toolbar?.setTitle(R.string.app_name)
         setSupportActionBar(toolbar)
+
+        var actionBar  = supportActionBar
+        actionBar?.setDisplayHomeAsUpEnabled(true)
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_pantalla_dos, menu)
